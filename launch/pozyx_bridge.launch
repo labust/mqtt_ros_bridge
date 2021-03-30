@@ -1,0 +1,6 @@
+<launch>  
+  <node pkg="mqtt_ros_bridge" type="pozyx_pos_bridge.py" name="pozyx_bridge" output="screen">
+    <rosparam command="load" file="$(find mqtt_ros_bridge)/config/pozyx_config.yaml" />
+  </node>
+</launch>
+
