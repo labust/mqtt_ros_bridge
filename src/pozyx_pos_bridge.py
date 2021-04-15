@@ -31,9 +31,9 @@ class pozyx_bridge(bridge.bridge):
                 is_success = msg_dict["success"]
                 if(is_success):
                     pos_message = Vector3Stamped()
-                    pos_message.vector.x = float(msg_dict["data"]["coordinates"]["x"])
-                    pos_message.vector.y = float(msg_dict["data"]["coordinates"]["y"])
-                    pos_message.vector.z = float(msg_dict["data"]["coordinates"]["z"])
+                    pos_message.vector.x = float(msg_dict["data"]["coordinates"]["x"])/1000
+                    pos_message.vector.y = float(msg_dict["data"]["coordinates"]["y"])/1000
+                    pos_message.vector.z = float(msg_dict["data"]["coordinates"]["z"])/1000
 
                     pozyx_stamp = float(msg_dict["timestamp"])
                     #print(int(pozyx_stamp))
