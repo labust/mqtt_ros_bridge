@@ -12,13 +12,15 @@ from Phidget22.Devices.GPS import *
 from gpiozero import CPUTemperature
 
 
-THINGSBOARD_HOST = 'localhost'
-#THINGSBOARD_HOST = '192.168.1.178'
-#THINGSBOARD_HOST = 'labustbuoy.ddnsfree.com'
+#THINGSBOARD_HOST = 'localhost'
+#THINGSBOARD_HOST = '192.168.1.5'
+THINGSBOARD_HOST = 'labustbuoy.ddnsfree.com'
 ACCESS_TOKEN = 'ABC123'
 
+time.sleep(1)
+
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
-INTERVAL=5
+INTERVAL=60
 
 sensor_data = {'temperature': 0, 'humidity': 0, 'latitude': 0, 'longitude': 0}
 humidity = 0.0
@@ -66,7 +68,7 @@ client.loop_start()
 try:
     while True:
         cpu = CPUTemperature()
-	temperature = cpu.temperature
+        temperature = cpu.temperature
         humidity = random.uniform(0,100)
         #temperature = random.uniform(10,40)
         humidity = round(humidity, 2)
@@ -74,8 +76,8 @@ try:
         print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%, Latitude: {:g}, Longitude: {:g}".format(temperature, humidity, lat, lon))
         sensor_data['temperature'] = temperature
         sensor_data['humidity'] = humidity
-	sensor_data['latitude'] = lat
-	sensor_data['longitude'] = lon
+        sensor_data['latitude'] = lat
+        sensor_data['longitude'] = lon
 
         # Sending humidity and temperature data to ThingsBoard
         client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
