@@ -1,6 +1,11 @@
 <launch>  
+  <arg name="pozyx_tag" default="$(optenv POZYX_TAG 0x6000)"/>
+  <arg name="pozyx_server_ip" default="$(optenv POZYX_SERVER_IP 10.0.10.22)"/>
+
   <node pkg="mqtt_ros_bridge" type="pozyx_pos_bridge.py" name="pozyx_bridge" output="screen">
     <rosparam command="load" file="$(find mqtt_ros_bridge)/config/pozyx_config.yaml" />
+    <param name="pozyx_server_ip" value="$(arg pozyx_server_ip)"/>
+    <remap from="~$(arg pozyx_tag)" to="lps" />
   </node>
 </launch>
 
