@@ -10,7 +10,7 @@ import math
 
 class pozyx_bridge(bridge.bridge):
 
-    def __init__(self, tags, mqtt_topic, client_id = "bridge",user_id = "",password = "", host = "localhost", port = "1883", keepalive = 60):
+    def __init__(self, tags, mqtt_topic, client_id = "",user_id = "",password = "", host = "localhost", port = 1883, keepalive = 60):
         self.tags = tags
         self.pos_publishers = {}
         for tag in tags:
@@ -59,12 +59,18 @@ def main():
         if isinstance(tag,int):
             print("\t" + hex(tag))
 
-    pozyx_sub = pozyx_bridge(pozyx_tags, '#', 'tags', host=pozyx_server_ip)
+    pozyx_sub = pozyx_bridge(pozyx_tags, '#', host=pozyx_server_ip)
 
     rospy.on_shutdown(pozyx_sub.hook)
 
-    while not rospy.is_shutdown():
-        pozyx_sub.looping()
+    # connect
+    pozyx_sub.connect_async()
+    pozyx_sub.start_looping()
+
+    rospy.spin()
+
+    # stop looping
+    pozyx_sub.stop_looping()
 
 
 if __name__ == '__main__':
