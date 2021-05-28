@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from mqtt_ros_bridge.msg import ImuPackage
 from mqtt_ros_bridge.msg import Vector3Time
-import bridge
+import mqtt_ros_bridge.bridge as bridge
 import rospy
 import signal
 

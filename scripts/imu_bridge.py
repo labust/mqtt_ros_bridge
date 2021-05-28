@@ -2,7 +2,7 @@
 
 from sensor_msgs.msg import Imu
 from geometry_msgs.msg import Vector3
-import bridge
+import mqtt_ros_bridge.bridge as bridge
 import rospy
 import signal
 

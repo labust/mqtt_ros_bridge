@@ -21,7 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
+catkin_python_setup()
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -107,7 +107,7 @@ add_message_files(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES mqtt_ros_bridge
+  LIBRARIES mqtt_ros_bridge
   CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
@@ -163,10 +163,9 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  src/bridge.py
-  src/imu_bridge.py
-  src/pozyx_pos_bridge.py
-  src/imu_bridge_recordings.py
+  scripts/imu_bridge.py
+  scripts/pozyx_pos_bridge.py
+  scripts/imu_bridge_recordings.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
